@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block page %}Home{% endblock page %}
+{% block main %}
+    <div class="blogform">
+
+    
+    <form action="" method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {% for field in form %}
+        
+        <div class="formfield">
+            <label for="">{{field.label}}</label>
+            {{field}}
+        </div>
+        
+
+        {% endfor %}
+
+
+    <input class="btn" type="submit" value="Submit">
+
+
+    </form>
+
+    </div>
+
+{% endblock main %}
+

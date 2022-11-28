@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block page %}
+User 
+{% endblock page %}
+
+{% block main %}
+<div class="blogform">
+
+
+    
+    <form action=" " method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+        
+        <div class="formfield">
+
+            <label for="">{{field.label}}</label>
+
+            {{field}}
+          
+            {% if field.errors %}
+                {% for err in field.errors %}
+                    <div class="formfield">
+                    <p style="color:#CF0A0A;"> {{ err }} </p>
+                    </div>
+                
+                {% endfor %}
+            
+            {% endif %}
+               
+     
+   
+        </div>
+        
+
+        {% endfor %}
+        <input class="btn" type="submit" value="Update">
+    </form>
+
+        
+    
+    </form>
+   
+    
+   
+
+
+<br>
+<br><br>
+<br><br>
+<br>
+<br><br>
+<br>
+<br><br>
+<br>
+<div>
+
+{% endblock main %}
+
+

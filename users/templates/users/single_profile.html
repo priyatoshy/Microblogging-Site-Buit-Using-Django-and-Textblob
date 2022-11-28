@@ -1,0 +1,71 @@
+
+{% extends 'index.html' %}
+{% load static %}
+
+{% block page %}Home{% endblock page %}
+
+{% block main %}
+
+
+
+
+    <div class="blog-content-poster-inner">
+        {% if request.user == data.user %}
+            <a class="desc-link-internal" href="{% url 'update-profile' data.id %}">
+                📝Edit Profile
+            </a>
+        {% else %}
+        <a class="desc-link-internal" href="#">
+           Send Message
+        </a>
+        {% endif %}
+        
+        
+        
+        <img class="single_thumbnail"  src="{{data.profile_picture.url}}"  alt="" width=>
+        <p>{{data.full_name}}</p>
+        <p>Email:{{data.email}}</p>
+        <p>Phone Number:{{data.phone_no}}</p>
+        <p>Address:{{data.address}}</p>
+        <p>Active From:{{data.created_on}}</p>
+        <p>Role:{{data.user_role}}</p>
+       
+    </div>
+    <div class="blog-content-poster-inner">
+        {% for data in blogs %}
+
+        <span class="blog-content-poster">
+           
+            
+     
+            <a class="desc-link" href="{% url 'show' data.id %}">
+                <img class="thumbnail" src="{{data.featured_image.url}}"  alt="">
+            </a>
+            
+            <p> </p>
+            <span class="reaction"><a class="reaction-link" href="{% url 'rate1' data.id %}">💘</a> </span>
+            <span class="reaction"><a class="reaction-link" href="{% url 'rate2' data.id %}">💙</a></span>
+            <span class="reaction"><a class="reaction-link"href="{% url 'rate3' data.id %}">💔</a></span>
+            <!---->
+            <a class="desc-link" href="{% url 'show-profile' data.writer.id %}">
+                <p>✍{{data.writer}}</p>
+             </a>
+      
+            <p class="main-content">📑{{data.content}}</p>
+    
+            <p>⏰{{data.created_on}}</p>
+            <p>💙{{data.voted}} Up{{data.voted|pluralize:"s"}} ✨{{data.rate}}</p>
+            <p>📜{{data.analysis}}</p>
+    
+        </span>
+    
+    
+    {% endfor %}
+        
+    </div>
+
+
+
+    
+    
+{% endblock main %}

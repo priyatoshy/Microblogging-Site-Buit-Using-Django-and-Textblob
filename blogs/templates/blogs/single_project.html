@@ -1,0 +1,87 @@
+
+{% extends 'index.html' %}
+{% load static %}
+
+{% block page %}Home{% endblock page %}Home
+
+{% block main %}
+
+
+
+
+    <div class="blog-content">
+        <img class="thumbnail" src="{{data.featured_image.url}}"  alt="">
+        <p>Title: {{data.title}} | {{data.created_on}}</p>
+        <p>Content: {{data.content}}</p>
+        <p>Upvotes: {{data.voted}}</p>
+        <p>Rating: {{data.rate}}</p>
+        <p>Anlysis: {{data.analysis}}</p>
+     
+
+            {% if data.writer.user == request.user %}
+            
+            
+                <a class="desc-link-internal" href="{% url 'update' data.id %}">Edit Blog</a>
+          
+            
+                <a class="desc-link-internal" href="{% url 'delete' data.id %}?next=/blog/{{data.id}}">Delete Blog</a>
+        
+                
+          {% else %}
+          <a class="desc-link-internal" href="{% url 'report' data.id %}?next=/blog/{{data.id}}">Report Blog</a>
+          {% endif %}
+     
+        {% for tag in data.tags.all %}
+            <p class="tags">{{tag}}</p>
+        {% endfor %}
+       
+        
+
+        <form action="{% url 'comment' data.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% for field in form %}
+            
+            <div class="formfield">
+                <label for="">{{field.label}}</label>
+                {{field}}
+            </div>
+            
+    
+            {% endfor %}
+
+
+            <input class="btn" type="submit" value="comment">
+        </form>
+
+
+
+
+
+
+        <p></p>
+        <p></p>
+
+        
+    </div>
+
+    
+    <div class="blog-content">
+    <p></p>
+    <p></p>
+    </h2>Comment Section</h2>
+        {% for data in comment  %}
+        
+            <div class="form-field">
+                <a class="desc-link" href="{% url 'show-profile' data.commentor.id %}">
+                    <p>✍{{data.commentor}}: {{data.comment}}</p>
+                 </a>
+            <div>
+        
+        {% endfor %}
+    </div>
+
+
+    
+    
+{% endblock main %}

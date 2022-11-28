@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block page %}Deletion{% endblock page %}
+{% block main %}
+    <div class="blogform">
+
+
+    <form action="" method="POST">
+
+        {% csrf_token %}
+
+
+    <a class="desc-link-internal" href="{{request.GET.next}}">Cancel</a>
+    <input class="btn"  type="submit" value="Confirm">
+
+
+    </form>
+
+</div>
+
+{% endblock main %}

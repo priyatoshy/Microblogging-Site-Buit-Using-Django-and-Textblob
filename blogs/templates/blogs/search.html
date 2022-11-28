@@ -1,0 +1,84 @@
+
+{% extends 'index.html' %}
+{% load static %}
+
+{% block page %}Search RES{% endblock page %}Hom
+
+{% block main %}
+<div class="blogform">
+    <div class="form-field">
+        <form action="{% url 'search' %}" method="GET">
+
+        <label for="search_query">Search</label>
+        <input class="form-input" type="search" name="search_query" id="search_query" value="{{search_query}}">
+        </form>
+        
+    </div>
+{% for data in blogs %}
+
+</div>
+
+    <span class="blog-content-poster">
+       
+        
+       
+        <a class="desc-link" href="{% url 'show' data.id %}">
+            <img class="thumbnail" src="{{data.featured_image.url}}"  alt="">
+        </a>
+        
+        <p> </p>
+        <span class="reaction"><a class="reaction-link" href="{% url 'rate1' data.id %}">💘</a> </span>
+        <span class="reaction"><a class="reaction-link" href="{% url 'rate2' data.id %}">💙</a></span>
+        <span class="reaction"><a class="reaction-link"href="{% url 'rate3' data.id %}">💔</a></span>
+        <!---->
+        <a class="desc-link" href="{% url 'show-profile' data.writer.id %}">
+            <p>✍{{data.writer}}</p>
+         </a>
+  
+        <p class="main-content">📑{{data.content}}</p>
+
+        <p>⏰{{data.created_on}}</p>
+        <p>💙{{data.voted}} Up{{data.voted|pluralize:"s"}} ✨{{data.rate}}</p>
+        <p>📜{{data.analysis}}</p>
+</span>
+
+
+{% endfor %}
+{% for data in blogs %}
+
+    <span class="blog-content-poster">
+       
+        
+       
+        <a class="desc-link" href="{% url 'show' data.id %}">
+            <img class="thumbnail" src="{{data.featured_image.url}}"  alt="">
+        </a>
+        
+        <p> </p>
+        <span class="reaction"><a class="reaction-link" href="{% url 'rate1' data.id %}">💘</a> </span>
+        <span class="reaction"><a class="reaction-link" href="{% url 'rate2' data.id %}">💙</a></span>
+        <span class="reaction"><a class="reaction-link"href="{% url 'rate3' data.id %}">💔</a></span>
+        <!---->
+        <a class="desc-link" href="{% url 'show-profile' data.writer.id %}">
+            <p>✍{{data.writer}}</p>
+         </a>
+  
+        <p class="main-content">📑{{data.content}}</p>
+
+        <p>⏰{{data.created_on}}</p>
+        <p>💙{{data.voted}} Up{{data.voted|pluralize:"s"}} ✨{{data.rate}}</p>
+        <p>📜{{data.analysis}}</p>
+
+        
+       
+       
+        
+        
+        
+    </span>
+
+
+{% endfor %}
+
+
+{% endblock main %}

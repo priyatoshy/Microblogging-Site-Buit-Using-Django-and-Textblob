@@ -1,0 +1,96 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block page %}
+User 
+{% endblock page %}
+
+{% block main %}
+<div class="blogform">
+
+{% if page == "register" %}
+    <h1>User Registration</h1>
+    <h1> 
+        <a class="desc-link" href="{% url 'login' %}">👉Alreay a user?</a>
+    </h1>
+    
+    <form action="{% url 'register' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+        
+        <div class="formfield">
+
+            <label for="">{{field.label}}</label>
+
+            {{field}}
+
+            {% if field.help_text %}
+                <div class="formfield">
+                    {{field.help_text}}
+                </div>
+            {% endif %}
+
+          
+            {% if field.errors %}
+                {% for err in field.errors %}
+                    <div class="formfield">
+                    <p style="color:#CF0A0A;"> {{ err }} </p>
+                    </div>
+                
+                {% endfor %}
+            
+            {% endif %}
+               
+     
+   
+        </div>
+        
+
+        {% endfor %}
+        <input class="btn" type="submit" value="Register">
+    </form>
+    
+
+
+{% else %}
+    
+    
+    <form action="{% url 'login' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="formfield">
+            <input class="form-input" type="text" name="username" placeholder="username">
+        </div>
+        <div class="formfield">
+            <input class="form-input" type="password" name="password" id="" placeholder="*****">
+        </div>
+        
+        <div class="formfield">
+            <input class="btn" type="submit" name="" id="">
+        </div>
+    
+    </form>
+    <h1> 
+        <a class="desc-link" href="{% url 'register' %}">👉Not a user?</a>
+    </h1>
+    <h1> 
+        <a class="desc-link" href="{% url 'reset_password' %}">Lost Password</a>
+    </h1>
+   
+{% endif %}  
+    
+   
+
+
+<br>
+<br><br>
+<br><br>
+<br>
+<br><br>
+<br>
+<br><br>
+<br>
+<div>
+
+{% endblock main %}
+
+

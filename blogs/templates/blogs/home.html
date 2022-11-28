@@ -1,0 +1,82 @@
+
+{% extends 'index.html' %}
+{% load static %}
+
+{% block page %}Home{% endblock page %}Home
+
+{% block main %}
+<div class="blogform">
+    <div class="form-field">
+        <form action="{% url 'search' %}" method="GET">
+
+        <label for="search_query">Search</label>
+        <input class="form-input" type="search" name="search_query" id="search_query">
+        </form>
+        
+    </div>
+</div>
+{% for data in blogs %}
+
+    <span class="blog-content-poster">
+       
+        
+       
+        <a class="desc-link" href="{% url 'show' data.id %}">
+            <img class="thumbnail" src="{{data.featured_image.url}}"  alt="">
+        </a>
+        
+        <p> </p>
+        <span class="reaction"><a class="reaction-link" href="{% url 'rate1' data.id %}">💘</a> </span>
+        <span class="reaction"><a class="reaction-link" href="{% url 'rate2' data.id %}">💙</a></span>
+        <span class="reaction"><a class="reaction-link"href="{% url 'rate3' data.id %}">💔</a></span>
+        <!---->
+        <a class="desc-link" href="{% url 'show-profile' data.writer.id %}">
+            <p>✍{{data.writer}}</p>
+         </a>
+  
+        <p class="main-content">📑{{data.content|linebreaksbr}}</p>
+
+        <p>⏰{{data.created_on}}</p>
+        <p>💙{{data.voted}} Up{{data.voted|pluralize:"s"}} ✨{{data.rate}}</p>
+        <p>📜{{data.analysis}}</p>
+
+        
+       
+       
+        
+        
+        
+    </span>
+
+
+{% endfor %}
+{% if blogs.has_other_pages %}
+<div class="upper-nav-lower">
+
+        {% if blogs.has_previous %}
+            <a class="desc-link-internal-below" href="?page={{blogs.previous_page_number}}">Previous</a>
+        {% endif %}
+
+        {% for page  in paginator.page_range %}
+
+       
+            {% if page == blogs.number %}
+        
+            <a class="desc-link-internal-below" href="?page={{page}}">{{page}}</a>
+            {% else %}
+            <a class="desc-link-internal-below-now" href="?page={{page}}">{{page}}</a>
+            {% endif %}
+
+        
+        
+        {% endfor %}
+
+    {% if blogs.has_next %}
+        <a class="desc-link-internal-below" href="?page={{blogs.next_page_number}}">Next</a>
+    {% endif %}
+    
+
+</div>
+{% endif %}
+
+{% endblock main %}

@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block page %}
+Users
+{% endblock page %}
+
+{% block main %}
+
+{% for data in profiles %}
+
+    <div class="blog-content-poster">
+        
+        <a href="{% url 'show-profile' data.id %}">
+
+            <img class="thumbnail" src="{{data.profile_picture.url}}"  alt="">
+        
+        </a>
+        
+        
+        
+        
+        <p> {{data.full_name}}</p>
+        <p> @{{data.email}}</p>
+
+        
+        
+    </div>
+
+
+{% endfor %}
+
+
+
+{% endblock main %}
+
