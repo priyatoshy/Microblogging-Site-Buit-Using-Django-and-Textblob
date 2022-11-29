@@ -6,7 +6,7 @@ Django NLP Based Microblogging Site
 
 •This Web Application Enables You To Sign Up With Your Email Account,Do Email Authentication,Reset Your Password With Email
 
-•It gives lets you select your topics of your interest and get a customized feed of the latest and highest rated blogs of your interest
+•It  lets you select your topics of your interest and get a customized feed of the latest and highest rated blogs of your interest
 
 •Along with letting you explore you blogs
 
