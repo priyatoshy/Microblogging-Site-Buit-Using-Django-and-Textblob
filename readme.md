@@ -8,7 +8,7 @@ Django NLP Based Microblogging Site
 
 •It  lets you select your topics of your interest and get a customized feed of the latest and highest rated blogs of your interest
 
-•Along with letting you explore you blogs
+•Along with letting you explore you latest blogs of new topics
 
 •It lets upvote and comment on blog posts
 
