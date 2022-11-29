@@ -17,23 +17,27 @@ from .decorators import unauthneticated_user
 def loginUser(request):
     page='login'
     context={"page":page}
-    if request.method=="POST":
-        username=request.POST['username']
-        password=request.POST['password']
-        try:
-            User.objects.get(username=username)
-            user=authenticate(request,username=username,password=password)
+    if request.user.is_authenticated==False:
 
-            if user!=None:
-            #authenticated and session added
-                login(request,user)
-                return redirect("/")
-            else:
-                messages.error(request,"🤖Username or Password is incorrect")
-        except:
-            messages.error(request,"😵Username doesnt't exist")
+        if request.method=="POST":
+            username=request.POST['username']
+            password=request.POST['password']
+            try:
+                User.objects.get(username=username)
+                user=authenticate(request,username=username,password=password)
+
+                if user!=None:
+                #authenticated and session added
+                    login(request,user)
+                    return redirect("/")
+                else:
+                    messages.error(request,"🤖Username or Password is incorrect")
+            except:
+                messages.error(request,"😵Username doesnt't exist")
+    else:
+        return redirect("/")
         
-       
+    
 
             
     return render(request,'users/login_register.html',context)
@@ -65,7 +69,7 @@ def show_profile(request,pk):
         if blogs:
             context={"data":profile,"blogs":blogs}
         else:
-            context={"data":"profile","blogs":[]}
+            context={"data":profile,"blogs":[]}
     else:
         context={}
         
@@ -88,11 +92,17 @@ def registerUser(request):
             #saving an instance before commiting
             user=form.save(commit=False)
             user.username=user.username.lower()
-            
-            user.save()
-            messages.success(request,"User Created")
-            login(request,user)
-            return redirect("/")
+            hold_object=User.objects.filter(email=user.email).first()
+            if hold_object:
+                print(f"\n\n\n{hold_object}\n\n\n")
+                messages.error(request,"Email Already Taken")
+                
+
+            else:
+                user.save()
+                messages.success(request,"User Created")
+                login(request,user)
+                return redirect(f"update-profile/{user.profile.id}")
         else:
             messages.error(request,"An error has happened")
             #the request with error must come to ths same page

@@ -80,3 +80,6 @@ class Messages(models.Model):
    def __str__(self):
        message=self.text[0:10]
        return message
+
+
+
