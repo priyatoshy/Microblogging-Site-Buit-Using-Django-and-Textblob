@@ -1,4 +1,7 @@
-Django-NLP-Based-Microblogging-Site
+Django NLP Based Microblogging Site
+
+
+
 •Micro Blogging Site built with Django,Textblob,Postgres,HTML,CSS and Javascript
 
 •This Web Application Enables You To Sign Up With Your Email Account,Do Email Authentication,Reset Your Password With Email
